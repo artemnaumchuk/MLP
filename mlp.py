@@ -16,8 +16,8 @@ Y = np.array([[0],
 
 
 # logistic (Sigmoid) function
-def nonlinear(x, derivative=False):
-    return x * (1 - x) if derivative else 1 / (1 + np.exp(-x))
+def nonlin(x, diriv=False):
+    return x * (1 - x) if diriv else 1 / (1 + np.exp(-x))
 
 
 # weights coefficients
@@ -32,10 +32,10 @@ for j in range(60000):
 
     # hidden layer use Sigmoid as activation function on dot product
     # of input data and randomly generated synapse weights
-    l1 = nonlinear(np.dot(l0, syn0))
+    l1 = nonlin(np.dot(l0, syn0))
 
     # output layer
-    l2 = nonlinear(np.dot(l1, syn1))
+    l2 = nonlin(np.dot(l1, syn1))
 
     l2_error = Y - l2
 
@@ -44,9 +44,9 @@ for j in range(60000):
 
     # back propagate for weight coefficients updates
     # using gradient descent to find local minima of error function
-    l2_delta = l2_error * nonlinear(l2, derivative=True)
+    l2_delta = l2_error * nonlin(l2, diriv=True)
     l1_error = l2_delta.dot(syn1.T)
-    l1_delta = l1_error * nonlinear(l1, derivative=True)
+    l1_delta = l1_error * nonlin(l1, diriv=True)
 
     syn1 += l1.T.dot(l2_delta)
     syn0 += l0.T.dot(l1_delta)
