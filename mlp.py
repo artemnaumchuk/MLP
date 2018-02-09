@@ -16,8 +16,8 @@ Y = np.array([[0],
 
 
 # logistic (Sigmoid) function
-def nonlin(x, diriv=False):
-    return x * (1 - x) if diriv else 1 / (1 + np.exp(-x))
+def nonlin(x, deriv=False):
+    return x * (1 - x) if deriv else 1 / (1 + np.exp(-x))
 
 
 # weights coefficients
@@ -44,9 +44,9 @@ for j in range(60000):
 
     # back propagate for weight coefficients updates
     # using gradient descent to find local minima of error function
-    l2_delta = l2_error * nonlin(l2, diriv=True)
+    l2_delta = l2_error * nonlin(l2, deriv=True)
     l1_error = l2_delta.dot(syn1.T)
-    l1_delta = l1_error * nonlin(l1, diriv=True)
+    l1_delta = l1_error * nonlin(l1, deriv=True)
 
     syn1 += l1.T.dot(l2_delta)
     syn0 += l0.T.dot(l1_delta)
